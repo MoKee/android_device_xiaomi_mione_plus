@@ -74,3 +74,5 @@ persist.timed.enable=true
 # start adb as root on boot
 service.adb.root=1
 
+#mass_storage
+ro.vold.umsdirtyratio=50

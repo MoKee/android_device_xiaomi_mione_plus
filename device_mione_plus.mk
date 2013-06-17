@@ -47,7 +47,10 @@ PRODUCT_COPY_FILES += \
     device/xiaomi/mione_plus/ramdisk/init.qcom.usb.sh:root/init.qcom.usb.sh \
     device/xiaomi/mione_plus/ramdisk/init.target.rc:root/init.target.rc \
     device/xiaomi/mione_plus/ramdisk/ueventd.mione.rc:root/ueventd.mione.rc \
-    device/xiaomi/mione_plus/ramdisk/sbin/chargeonlymode:root/sbin/chargeonlymode
+    device/xiaomi/mione_plus/ramdisk/sbin/chargeonlymode:root/sbin/chargeonlymode \
+    device/xiaomi/mione_plus/ramdisk/init.mione.syspart_system.rc:root/init.mione.syspart_system.rc \
+    device/xiaomi/mione_plus/ramdisk/init.mione.syspart_system1.rc:root/init.mione.syspart_system1.rc \
+    device/xiaomi/mione_plus/ramdisk/mount_ext4.sh:system/bin/mount_ext4.sh
 
 # wifi
 PRODUCT_COPY_FILES += \

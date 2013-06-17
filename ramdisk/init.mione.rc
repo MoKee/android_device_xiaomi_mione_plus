@@ -6,6 +6,7 @@
 
 
 import init.qcom.rc
+import init.mione.syspart_${ro.boot.syspart}.rc
 
 # most of the following are from boot.img of mioneplus_QDR68
 
@@ -49,11 +50,11 @@ on boot
 
 on fs
 # mount mmc partitions
-    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/system /system wait rw barrier=1 noatime nodiratime
+#    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/system /system wait rw barrier=1 noatime nodiratime
     mount ext4 /dev/block/platform/msm_sdcc.1/by-name/userdata /data relatime nosuid nodev barrier=1 journal_checksum noauto_da_alloc
     mount ext4 /dev/block/platform/msm_sdcc.1/by-name/persist /persist relatime nosuid nodev barrier=1 journal_checksum noauto_da_alloc
     mount ext4 /dev/block/platform/msm_sdcc.1/by-name/cache /cache relatime nosuid nodev barrier=1 journal_checksum noauto_da_alloc
-    #Setting permissons for misc partition
+#    #Setting permissons for misc partition
     chmod 0666 /dev/block/platform/msm_sdcc.1/by-name/misc
 
 on post-fs-data

@@ -32,12 +32,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     device/xiaomi/mione_plus/configs/gps.conf:system/etc/gps.conf
 
-# Hostapd (Required for Wi-Fi)
-PRODUCT_PACKAGES += \
-    hostapd_cli \
-    calibrator \
-    hostapd
-
 # Ramdisk files
 PRODUCT_COPY_FILES += \
     device/xiaomi/mione_plus/ramdisk/init.mione.rc:root/init.mione.rc \

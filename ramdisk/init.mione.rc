@@ -61,8 +61,6 @@ on post-fs-data
 # double check /data/radio
     mkdir /data/radio 0770 radio radio
     chmod 2770 /data/radio
-# support for hostapd
-    mkdir /data/misc/wifi/hostapd 0777 wifi wifi
 
 # InputMethodManagerService
     mkdir /data/system/inputmethod 0755 system system

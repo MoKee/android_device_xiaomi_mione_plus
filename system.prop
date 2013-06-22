@@ -5,6 +5,8 @@
 # Default network type
 # 7 => Global
 ro.telephony.default_network=7
+ro.cdma.home.operator.numeric=46003
+ro.cdma.factory=china
 
 # Ril
 ro.ril.oem.nosim.ecclist=911,112,120,122,110,119
@@ -72,3 +74,5 @@ persist.timed.enable=true
 # start adb as root on boot
 service.adb.root=1
 
+#mass_storage
+ro.vold.umsdirtyratio=50

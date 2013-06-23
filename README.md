@@ -1,6 +1,4 @@
-Device tree for the Xiaomi MI-One Plus
 
---------------------------------
 Working:
 Boot on system1
 Wi-Fi

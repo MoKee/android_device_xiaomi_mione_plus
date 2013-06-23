@@ -1,5 +1,5 @@
-
 Working:
+------------
 Boot on system1
 Wi-Fi
 Radio
@@ -10,6 +10,7 @@ Storage
 etc.
 
 Not Working
+--------------
 DualSystem(Not booting when flash into system2)
 Wi-Fi Hotspot
 

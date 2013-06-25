@@ -30,11 +30,10 @@
 
 #include <pixelflinger/pixelflinger.h>
 
-#ifdef BOARD_USE_CUSTOM_RECOVERY_FONT
-#include BOARD_USE_CUSTOM_RECOVERY_FONT
-#else
-#include "font_10x18.h"
-#endif
+
+#include "font_10x18_cn.h"
+const unsigned cw_en=10;
+
 
 #include "minui.h"
 
@@ -50,10 +49,7 @@
 #endif
 
 #define NUM_BUFFERS 2
-
-/* PAGE_SIZE and PAGE_MASK come from "bionic/libc/kernel/arch-arm/asm/page.h" */
 #define PAGE_ALIGN(n)   ((n + PAGE_SIZE - 1) & PAGE_MASK)
-
 typedef struct {
     GGLSurface texture;
     unsigned cwidth;
@@ -69,11 +65,30 @@ static GGLSurface gr_mem_surface;
 static unsigned gr_active_fb = 0;
 static unsigned double_buffering = 0;
 
+
 static int gr_fb_fd = -1;
 static int gr_vt_fd = -1;
 
 static struct fb_var_screeninfo vi;
 static struct fb_fix_screeninfo fi;
+
+int getGBCharID(unsigned c1, unsigned c2)
+{
+    if (c1 >= 0xB0 && c1 <=0xF7 && c2>=0xA1 && c2<=0xFE)
+	{
+		return (c1-0xB0)*94+c2-0xA1;
+	}
+	return -1;
+}
+
+int getUNICharID(unsigned short unicode)
+{
+	int i;
+	for (i = 0; i < UNICODE_NUM; i++) {
+		if (unicode == unicodemap[i]) return i;
+	}
+	return -1;
+}
 
 static int get_framebuffer(GGLSurface *fb)
 {
@@ -160,9 +175,6 @@ static int get_framebuffer(GGLSurface *fb)
     fb->width = vi.xres;
     fb->height = vi.yres;
     fb->stride = fi.line_length/PIXEL_SIZE;
-    /* align to page boundary, will fix display shift problem
-    fb->data = (void*) (((unsigned) bits) + vi.yres * fi.line_length);
-     */
     fb->data = (void*) (((unsigned) bits) + PAGE_ALIGN(vi.yres * fi.line_length));
     fb->format = PIXEL_FORMAT;
     memset(fb->data, 0, vi.yres * fi.line_length);
@@ -234,7 +246,12 @@ int gr_text(int x, int y, const char *s)
     GGLContext *gl = gr_context;
     GRFont *font = gr_font;
     unsigned off;
+	unsigned off2;
+	unsigned off3;
+	int id;
+	unsigned short unicode;
 
+   
     y -= font->ascent;
 
     gl->bindTexture(gl, &font->texture);
@@ -244,19 +261,49 @@ int gr_text(int x, int y, const char *s)
     gl->enable(gl, GGL_TEXTURE_2D);
 
     while((off = *s++)) {
-        off -= 32;
-        if (off < 96) {
-            gl->texCoord2i(gl, (off * font->cwidth) - x, 0 - y);
-            gl->recti(gl, x, y, x + font->cwidth, y + font->cheight);
-        }
-        x += font->cwidth;
+		if (off < 0x80)
+		{
+		    off -= 32;
+		    if (off < 96) {
+				if ((x + cw_en) >= gr_fb_width()) return x;
+		        gl->texCoord2i(gl, (off * font->cwidth) - x, 0 - y);
+		        gl->recti(gl, x, y, x + cw_en, y + font->cheight);
+		    }
+		    x += cw_en;
+		}
+		else
+		{
+			if ((off & 0xF0) == 0xE0)
+			{
+				off2 = *s++;
+				off3 = *s++;
+				unicode = (off & 0x1F) << 12;
+				unicode |= (off2 & 0x3F) << 6;
+				unicode |= (off3 & 0x3F);
+				id = getUNICharID(unicode);
+				//LOGI("%X %X %X  %X  %d", off, off2, off3, unicode, id);
+				if (id >= 0) {
+					if ((x + font->cwidth) >= gr_fb_width()) return x;
+				    gl->texCoord2i(gl, ((id % 96) * font->cwidth) - x, (id / 96 + 1) * font->cheight - y);
+				    gl->recti(gl, x, y, x + font->cwidth, y + font->cheight);
+				    x += font->cwidth;
+				} else {
+				    x += font->cwidth;
+				}
+			} else {
+			    x += cw_en;
+			}
+		}
     }
+    
 
     return x;
 }
 
 void gr_fill(int x, int y, int w, int h)
 {
+   
+
     GGLContext *gl = gr_context;
     gl->disable(gl, GGL_TEXTURE_2D);
     gl->recti(gl, x, y, w, h);
@@ -268,6 +315,7 @@ void gr_blit(gr_surface source, int sx, int sy, int w, int h, int dx, int dy) {
     }
     GGLContext *gl = gr_context;
 
+ 
     gl->bindTexture(gl, (GGLSurface*) source);
     gl->texEnvi(gl, GGL_TEXTURE_ENV, GGL_TEXTURE_ENV_MODE, GGL_REPLACE);
     gl->texGeni(gl, GGL_S, GGL_TEXTURE_GEN_MODE, GGL_ONE_TO_ONE);

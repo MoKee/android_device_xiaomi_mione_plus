@@ -1,6 +1,6 @@
 Working:
 ------------
-Boot on system1
+Boot on both systems
 
 Wi-Fi
 
@@ -19,7 +19,6 @@ etc.
 
 Not Working
 --------------
-DualSystem(Not booting when flash into system2)
 
 Wi-Fi Hotspot
 

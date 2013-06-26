@@ -44,7 +44,8 @@ PRODUCT_COPY_FILES += \
     device/xiaomi/mione_plus/ramdisk/sbin/chargeonlymode:root/sbin/chargeonlymode \
     device/xiaomi/mione_plus/ramdisk/init.mione.syspart_system.rc:root/init.mione.syspart_system.rc \
     device/xiaomi/mione_plus/ramdisk/init.mione.syspart_system1.rc:root/init.mione.syspart_system1.rc \
-    device/xiaomi/mione_plus/ramdisk/mount_ext4.sh:system/bin/mount_ext4.sh
+    device/xiaomi/mione_plus/ramdisk/default.prop:root/default.prop \
+    device/xiaomi/mione_plus/ramdisk/mount_ext4.sh:/system/bin/mount_ext4.sh
 
 # wifi
 PRODUCT_COPY_FILES += \

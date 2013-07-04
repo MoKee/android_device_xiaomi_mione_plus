@@ -27,7 +27,7 @@ DEVICE_PACKAGE_OVERLAYS += device/xiaomi/mione_plus/overlay
 PRODUCT_PACKAGES += \
     gps.mione \
     lights.mione \
-    libreadmac
+#    libreadmac
 
 # gps.conf
 PRODUCT_COPY_FILES += \

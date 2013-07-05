@@ -87,12 +87,8 @@ unsigned char *read_mac() {
  * if(!strcmp(mac_buf,"")) {
  *     x=read_mac();
  * 
- * //    This is Mione_plus get mac address on Miuiv4 , but You can not use on CM10.1 , 
- * //    logcat : vsprintf buffer overflow detected 
- * //    sprintf(mac, "%s mac=0x%02x,0x%02x,0x%02x,0x%02x,0x%02x,0x%02x", DHD_DRIVER_MODULE_ARG, x[0],x[1],x[2],x[3],x[4],x[5]);
- * 
- * //  So we can use the following    
- *     sprintf(mac_buf,"mac=0x%02x,0x%02x,0x%02x,0x%02x,0x%02x,0x%02x", x[0],x[1],x[2],x[3],x[4],x[5]);
+ * //  We must use the following or WI-FI cannot be turned on  
+ *     sprintf(mac_buf,"%s mac=0x%02x,0x%02x,0x%02x,0x%02x,0x%02x,0x%02x", DRIVER_MODULE_ARG, x[20],x[16],x[12],x[8],x[4],x[0]);
  * }
  * ALOGI("Got WLAN MAC Address: %s \ ",mac_buf);
  * 

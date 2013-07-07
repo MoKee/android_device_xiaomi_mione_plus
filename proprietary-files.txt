@@ -6,6 +6,8 @@ lib/libaudioalsa.so
 lib/libaudcal.so
 lib/libdiag.so
 lib/libv8.so
+lib/libnv.so
+lib/liboncrpc.so
 
 # HAL
 lib/hw/camera.msm8660.so
@@ -53,7 +55,6 @@ etc/init.qcom.modem_links.sh
 
 # onc rpc
 lib/libdsm.so
-lib/liboncrpc.so
 lib/libqueue.so
 
 # qmiproxy

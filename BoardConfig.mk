@@ -26,7 +26,6 @@
 
 # inherit from msm8660-common
 -include device/xiaomi/msm8660-common/BoardConfigCommon.mk
-
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := mione
 
@@ -71,7 +70,7 @@ BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 # Recovery
 BOARD_USES_MMCUTILS := true
 BOARD_HAS_NO_SELECT_BUTTON := true
-BOARD_CUSTOM_GRAPHICS := ../../../device/xiaomi/mione_plus/recovery/graphics.c
+# BOARD_CUSTOM_GRAPHICS := ../../../device/xiaomi/mione_plus/recovery/graphics.c
 # BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
 BOARD_UMS_LUNFILE := "/sys/class/android_usb/android0/f_mass_storage/lun/file"
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/class/android_usb/android0/f_mass_storage/lun/file"

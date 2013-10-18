@@ -6,7 +6,7 @@ PRODUCT_RELEASE_NAME := mione_plus
 
 TARGET_BOOTANIMATION_NAME := vertical-480x854
 
-# Inherit some common CM stuff.
+# Inherit some common MK stuff.
 $(call inherit-product, vendor/mk/config/common.mk)
 
 # old audio files

@@ -1,0 +1,6 @@
+
+on fs
+    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/system1 /system wait rw barrier=1 noatime nodiratime
+    mkdir /system/test 0755 system system
+    exec /system/bin/sh /system/bin/mount_ext4.sh /dev/block/platform/msm_sdcc.1/by-name/userdata /data
+    exec /system/bin/sh /system/bin/mount_ext4.sh /dev/block/platform/msm_sdcc.1/by-name/cache /cache

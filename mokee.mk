@@ -1,13 +1,10 @@
-# Specify phone tech before including full_phone
-$(call inherit-product, vendor/mk/config/gsm.mk)
-
 # Release name
 PRODUCT_RELEASE_NAME := mione_plus
 
 TARGET_BOOTANIMATION_NAME := vertical-480x854
 
 # Inherit some common MK stuff.
-$(call inherit-product, vendor/mk/config/common.mk)
+$(call inherit-product, vendor/mk/config/common_full_phone.mk)
 
 # old audio files
 include frameworks/base/data/sounds/OldAudio.mk

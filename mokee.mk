@@ -20,10 +20,6 @@ PRODUCT_MANUFACTURER := Xiaomi
 
 PRODUCT_CHARACTERISTICS := phone
 
-# Hack for build
-$(shell mkdir -p $(OUT)/obj/EXECUTABLES/tc_intermediates)
-$(shell cp device/xiaomi/mione_plus/tc_intermediates/q_prio.o $(OUT)/obj/EXECUTABLES/tc_intermediates/)
-
 # Set build fingerprint / ID / Product Name etc.
 PRODUCT_BUILD_PROP_OVERRIDES += \
 	PRODUCT_NAME=mione_plus \

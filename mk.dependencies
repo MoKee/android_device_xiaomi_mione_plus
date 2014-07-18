@@ -8,11 +8,11 @@
    "target_path": "device/xiaomi/msm8660-common"
  },
  {
-   "repository": "android_hardware_qcom_display-legacy",
-   "target_path": "hardware/qcom/display-legacy"
+   "repository": "android_hardware_qcom_display-legacy-old",
+   "target_path": "hardware/qcom/display-legacy-old"
  },
  {
-   "repository": "android_hardware_qcom_media-legacy",
-   "target_path": "hardware/qcom/media-legacy"
+   "repository": "android_hardware_qcom_media-legacy-old",
+   "target_path": "hardware/qcom/media-legacy-old"
  }
 ]

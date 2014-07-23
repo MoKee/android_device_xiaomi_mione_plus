@@ -23,6 +23,16 @@ $(call inherit-product-if-exists, vendor/xiaomi/mione_plus/mione_plus-vendor.mk)
 
 DEVICE_PACKAGE_OVERLAYS += device/xiaomi/mione_plus/overlay
 
+LOCAL_PATH := device/xiaomi/mione_plus/prebuilt
+ifeq ($(TARGET_PREBUILT_KERNEL),)
+LOCAL_KERNEL := $(LOCAL_PATH)/kernel
+else
+LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
+endif
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_KERNEL):kernel
+
 # GPS and Light
 PRODUCT_PACKAGES += \
     gps.mione \
